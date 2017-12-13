@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  script.
+    const applicationId = "#{applicationId}";
+    const locationId    = "#{locationId}";
+  script(src="https://js.squareup.com/v2/paymentform")
+  script(src="/Javascripts/app.js")
+  div.row
+    div.col-md-12
+      h1 JavaScript SDKデモ
+      p カード番号は 5409889944179029 を使ってください。
+      form#nonce-form(action="/pay",method="post")
+        div.form-group
+          label 住所
+          input.form-control(type="text",name="address")
+        div.form-group
+          label カード番号
+          div#sq-card-number
+        div.form-group
+          label 有効期限
+          div#sq-expiration-date
+        div.form-group
+          label CVV
+          div#sq-cvv
+        div.form-group
+          label 郵便番号
+          div#sq-postal-code
+        input#card-nonce(type="hidden",name="nonce")
+        button.btn.btn-default(type="submit",onclick="requestCardNonce(event)") 注文する
